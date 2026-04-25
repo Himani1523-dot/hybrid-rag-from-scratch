@@ -181,7 +181,7 @@ Example: Switching from local model to OpenAI only requires updating config valu
 
 ---
 
-## ⚠️ Real-World Challenges & Fixes
+## ⚠️ Challenges & Fixes
 
 ### ❌ Semantic retrieval failure
 
