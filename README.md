@@ -14,7 +14,7 @@
 
 A fully modular **Retrieval-Augmented Generation (RAG)** system built from scratch using Python — without relying on frameworks like LangChain or LlamaIndex.
 
-This project demonstrates a **practical, production-style implementation of RAG systems**, focusing on retrieval quality, ranking strategies, and hallucination control.
+This project demonstrates a **practical implementation of RAG systems**, focusing on retrieval quality, ranking strategies, and hallucination control.
 
 ---
 
@@ -150,7 +150,7 @@ The LLM layer is intentionally **modular and replaceable**, allowing easy upgrad
 
 ---
 
-### 🔄 Why this matters
+###  Why this matters?
 
 Different use cases require different models:
 
@@ -161,7 +161,7 @@ Different use cases require different models:
 
 ---
 
-### 🔌 Supported Options
+###  Supported Options
 
 This pipeline can be easily adapted to use:
 Example: Switching from local model to OpenAI only requires updating config values.
