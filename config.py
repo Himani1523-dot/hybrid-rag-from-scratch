@@ -38,33 +38,3 @@ LLM_MODEL = "phi-3-mini"
 
 
 
-
-
-
-
-
-# #  Chunking
-# CHUNK_SIZE = 200 
-# CHUNK_OVERLAP = 80 
-
-# #  Embeddings
-# EMBEDDING_MODEL = "all-MiniLM-L6-v2"
-
-# #  Vector Store
-# VECTORSTORE_PATH = "vectorstore/"
-
-# #  Retrieval
-# TOP_K = 3
-
-# #threshold
-# SCORE_THRESHOLD = 0.55
-
-# MAX_CHUNK_CHARS = 400      # per chunk limit
-# MAX_CONTEXT_CHARS = 1200   # total context limit
-
-
-# #  LLM (LM Studio)
-# LLM_BASE_URL = "http://localhost:1234/v1"
-# LLM_MODEL = "phi-3-mini"        #mistral , phi-2 , tinyllama
-
-
