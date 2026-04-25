@@ -1,0 +1,51 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+.env/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Streamlit
+.streamlit/
+
+# Logs
+*.log
+
+# Environment variables
+.env
+
+# Vector store (IMPORTANT - large files)
+*.faiss
+*.index
+*.npy
+vectorstore/
+
+# Temporary uploaded files
+tmp/
+temp/
+*.pdf
+
+# Jupyter (if used)
+.ipynb_checkpoints/
+
+# IDEs
+.vscode/
+.idea/
+
+# Build / dist
+build/
+dist/
+*.egg-info/
+
+# Cache
+.cache/
+
+demo.py
+*_demo.py
