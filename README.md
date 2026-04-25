@@ -295,3 +295,8 @@ This project demonstrates a **deep understanding of RAG systems**, including:
 ---
 
 ⭐ If you found this useful, consider starring the repo!
+
+## 📬 Contact
+
+If you have any questions, feedback, or suggestions, feel free to reach out at **himani.sharma2315@gmail.com** — I’d be happy to connect!
+
