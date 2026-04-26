@@ -2,9 +2,12 @@ import streamlit as st
 import os
 import tempfile
 
+from src.utils.logger import setup_logger,get_logger
+setup_logger()
+logger = get_logger(__name__)
+
 from src.pipeline import RAGPipeline
 from config import VECTORSTORE_PATH, TOP_K
-
 
 #----------Helper function ----------------------
 def save_uploaded_files(uploaded_files):
@@ -47,7 +50,7 @@ query = st.text_input("Ask a question:")
 
 if st.button("Search") and query:
     answer, results = pipeline.query(query, top_k=TOP_K)
-    print("[DEBUG] TOP_K from config:", TOP_K)
+    logger.debug(f"TOP_K from config: {TOP_K}")
 
     st.subheader("💡 Answer")
     st.write(answer)

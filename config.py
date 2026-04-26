@@ -1,8 +1,11 @@
+"""config.py"""
+PDF_PATH = None
+
 # Chunking settings (controls context size)
 CHUNK_SIZE = 200
 CHUNK_OVERLAP = 80
 
-# Embedding model (can be changed based on performance needs)
+# Embedding model = bi-encoder model(can be changed based on performance needs)
 EMBEDDING_MODEL = "all-MiniLM-L6-v2"
 
 # Vector storage path
@@ -17,13 +20,24 @@ VECTORSTORE_PATH = "vectorstore/"
  - Lower threshold → more recall (but risk of noise)
 """
 TOP_K = 3
-SCORE_THRESHOLD = 0.55
+
+SCORE_THRESHOLD = 0.55  
+
+"""
+SCORE_THRESHOLD Used during FAISS (bi-encoder) retrieval stage to filter out low-similarity chunks.
+Any chunk with cosine similarity below this threshold is discarded early. """    
+
+"""
+   Stage 1 → FAISS filter (SCORE_THRESHOLD)
+   Stage 2 → Cross-encoder decision (CROSS_ENCODER_THRESHOLD)
+   """
+CROSS_ENCODER_THRESHOLD = 0.3
 
 """
 Context control (prevents LLM overload)
 """
-MAX_CHUNK_CHARS = 400
-MAX_CONTEXT_CHARS = 1200
+MAX_CHUNK_CHARS = 600
+MAX_CONTEXT_CHARS = 1500
 
 """ 
 LLM configuration (flexible & replaceable)

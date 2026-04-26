@@ -2,12 +2,16 @@ import numpy as np
 from config import SCORE_THRESHOLD
 from rank_bm25 import BM25Okapi
 
+from sentence_transformers import CrossEncoder
+
+from src.utils.logger import get_logger
+logger = get_logger(__name__)
+
+
 class Retriever:
     def __init__(self, vectorstore, embedder):
         self.vectorstore = vectorstore
-        self.embedder = embedder
-        
-        print("[INIT] Building BM25 index...")        
+        self.embedder = embedder               
         """
         BM25 setup (keyword-based retrieval)
         """
@@ -16,13 +20,15 @@ class Retriever:
             for chunk in self.vectorstore.metadata
         ]
         self.bm25 = BM25Okapi(self.tokenized_corpus)
-        print(f"[INIT] BM25 ready | Total chunks: {len(self.tokenized_corpus)}")
+        logger.info(f"[INIT] BM25 ready | Total chunks: {len(self.tokenized_corpus)}")
+
+        self.cross_encoder = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
+        logger.info("[INIT] Cross-Encoder ready")
 
 
     def bm25_retrieve(self, query: str, top_k: int = 5):
         """
-        Retrieve chunks using BM25 (keyword search)
-        WHY: - captures exact matches 
+        Retrieve chunks using BM25 (keyword search),WHY: - captures exact matches 
         """
         tokenized_query = query.lower().split()
         scores = self.bm25.get_scores(tokenized_query)
@@ -36,7 +42,7 @@ class Retriever:
         results = []
         for idx in top_indices:
             chunk_metadata = self.vectorstore.metadata[idx]
-            print(f"[BM25] Score: {scores[idx]:.3f} | {chunk_metadata['text'][:50]}")
+            logger.info(f"[BM25] Score: {scores[idx]:.3f} | {chunk_metadata['text'][:50]}")
 
             results.append({
                 **chunk_metadata,
@@ -84,7 +90,7 @@ class Retriever:
 
             chunk_metadata = self.vectorstore.metadata[idx]
 
-            print(f"[FAISS] Score: {score:.3f} | {chunk_metadata['text'][:50]}")
+            logger.info(f"[FAISS] Score: {score:.3f} | {chunk_metadata['text'][:50]}")
 
             if len(chunk_metadata["text"].split()) < 40:
                 continue
@@ -112,7 +118,9 @@ class Retriever:
         if not results:
             return []
 
-        results = self.rerank(query, results)
+        # results = self.rerank(query, results)
+        # return results
+        results = self.cross_rerank(query, results, top_k)
         return results
 
 
@@ -138,7 +146,7 @@ class Retriever:
 
         results = sorted(results, key=lambda x: x["final_score"], reverse=True)
     
-        print("\n[FINAL TOP RESULTS]")
+        logger.info("\n[FINAL TOP RESULTS]")
         for r in results[:3]:
             print(
                 f"{r['final_score']:.3f} | "
@@ -148,6 +156,28 @@ class Retriever:
             )
 
         return results
+    
+
+    def cross_rerank(self, query, results, top_k):
+        if not results:
+            return []
+
+        results = results[:10]      # limit candidates (important for speed)
+
+        pairs = [(query, r["text"]) for r in results]
+
+        scores = self.cross_encoder.predict(pairs)
+        for r, score in zip(results, scores):
+            r["cross_score"] = float(score)
+
+        results = sorted(results, key=lambda x: x["cross_score"], reverse=True)
+
+        logger.info("\n[CROSS-ENCODER TOP RESULTS]")
+
+        for r in results[:top_k]:
+            logger.info(f"{r['cross_score']:.3f} | {r['text'][:50]}")
+
+        return results[:top_k]
     
 
     

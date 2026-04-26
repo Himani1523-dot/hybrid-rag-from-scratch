@@ -1,6 +1,9 @@
 from openai import OpenAI
 from config import LLM_BASE_URL, LLM_MODEL ,MAX_CONTEXT_CHARS, MAX_CHUNK_CHARS
 
+from src.utils.logger import get_logger
+logger = get_logger(__name__)
+
 
 class LLM:
     def __init__(self):
@@ -27,7 +30,7 @@ class LLM:
 
             context += chunk_text + "\n\n"
         
-        print("\n[DEBUG] CONTEXT SENT TO LLM:\n", context)
+        logger.debug("\n[DEBUG] CONTEXT SENT TO LLM:\n", context)
 
         prompt = f"""
         <|system|>

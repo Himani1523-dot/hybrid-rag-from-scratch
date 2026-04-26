@@ -1,3 +1,4 @@
+#bi-encoder model.
 from sentence_transformers import SentenceTransformer
 
 class Embedder:
@@ -22,8 +23,7 @@ class Embedder:
                 texts,
                 show_progress_bar=False,
                 normalize_embeddings=True
-            )                                     #normalize_embeddings=True can improve retrieval quality more than switching models sometimes.
-
+            )                                     
             all_embeddings.extend(embeddings)
 
             # preserve metadata alignment

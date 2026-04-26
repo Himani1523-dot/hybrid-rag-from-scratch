@@ -8,6 +8,9 @@
 ![License](https://img.shields.io/badge/License-MIT-lightgrey)
 ![Built From Scratch](https://img.shields.io/badge/Built-From%20Scratch-black)
 ![Status](https://img.shields.io/badge/Status-Active-success)
+![Maintained](https://img.shields.io/badge/Maintained-Yes-brightgreen)
+![Development](https://img.shields.io/badge/Development-Active%20Learning-orange)
+![Last Updated](https://img.shields.io/badge/Updated-2026-blue)
 ![Contributions](https://img.shields.io/badge/Contributions-Welcome-blueviolet)
 
 # Hybrid RAG Pipeline (From Scratch — No Frameworks)
@@ -226,6 +229,92 @@ BM25 failed due to missing metadata
 
 ---
 
+---
+
+## 🚀 RAG Upgrade: Cross-Encoder + Logging
+
+### 🔄 Upgrade Summary
+
+The system was upgraded from **manual heuristic reranking** to a **Cross-Encoder-based semantic reranking**, along with **structured logging for full observability**.
+
+---
+
+### 🔹 Before (Heuristic Reranking)
+
+- Used manually tuned hybrid score:
+  - FAISS similarity
+  - BM25 keyword score
+  - word overlap
+- Limitations:
+  - No deep semantic understanding
+  - Failed on paraphrased queries
+  - Required manual tuning
+  - Sometimes ranked incorrect chunks higher
+
+---
+
+### 🔹 After (Cross-Encoder Reranking)
+
+- Model used:cross-encoder/ms-marco-MiniLM-L-6-v2
+
+- Replaced heuristic scoring with:
+
+- Improvements:
+- Understands **query + chunk together**
+- Captures true semantic relevance
+- Handles paraphrased and complex queries
+- Reduces irrelevant chunks passed to LLM
+
+---
+
+### 🔹 Embedding & Retrieval Models
+
+This system uses a **dual-model architecture**:
+
+- **Bi-Encoder (Fast Retrieval):**
+
+- Used for embedding generation
+- Enables fast FAISS similarity search
+
+- **Cross-Encoder (Accurate Reranking):**
+
+- Evaluates (query, chunk) together
+- Provides deep semantic relevance scoring
+
+👉 Combines:
+- ⚡ speed (bi-encoder)
+- 🎯 accuracy (cross-encoder)
+
+---
+
+### 🔹 Logging Upgrade
+
+Added structured logging across the system:
+
+- Retriever → FAISS, BM25, cross-encoder scores
+- Pipeline → query flow, guard decisions
+- LLM → context usage
+
+**Why this matters:**
+
+- Easier debugging of retrieval failures  
+- Visibility into ranking decisions  
+- Better understanding of system behavior  
+
+👉 Transforms the system from a **black box → observable pipeline**
+
+---
+
+### 🧠 Key Insight
+
+Shift from:
+
+👉 *"similar vectors = relevant"*
+
+to:
+
+👉 *"model understands query + text = relevant"*
+
 ## 🧠 Design Philosophy
 
 - Transparency over abstraction
@@ -262,7 +351,6 @@ Every component is manually implemented to expose real-world tradeoffs.
 
 ## 🔥 Future Improvements
 
-- Cross-encoder reranker (BGE, etc.)
 - Evaluation metrics (precision, recall)
 - Improved BM25 preprocessing
 - Streaming responses
@@ -295,8 +383,3 @@ This project demonstrates a **deep understanding of RAG systems**, including:
 ---
 
 ⭐ If you found this useful, consider starring the repo!
-
-## 📬 Contact
-
-If you have any questions, feedback, or suggestions, feel free to reach out at **himani.sharma2315@gmail.com** — I’d be happy to connect!
-
