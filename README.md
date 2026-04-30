@@ -13,24 +13,6 @@
 ![Last Updated](https://img.shields.io/badge/Updated-2026-blue)
 ![Contributions](https://img.shields.io/badge/Contributions-Welcome-blueviolet)
 
-# Hybrid RAG Pipeline (From Scratch — No Frameworks)
-
-## 🧠 RAG Pipeline Architecture
-
-![Python](https://img.shields.io/badge/Python-3.12-blue)
-![Framework](<https://img.shields.io/badge/Framework-None_(From_Scratch)-red>)
-![RAG](https://img.shields.io/badge/RAG-Hybrid-green)
-![LLM](https://img.shields.io/badge/LLM-Phi--3-orange)
-![VectorDB](https://img.shields.io/badge/VectorDB-FAISS-purple)
-![Retrieval](https://img.shields.io/badge/Retrieval-BM25+Semantic-yellow)
-![UI](https://img.shields.io/badge/UI-Streamlit-ff4b4b)
-![License](https://img.shields.io/badge/License-MIT-lightgrey)
-![Built From Scratch](https://img.shields.io/badge/Built-From%20Scratch-black)
-![Status](https://img.shields.io/badge/Status-Active-success)
-![Maintained](https://img.shields.io/badge/Maintained-Yes-brightgreen)
-![Development](https://img.shields.io/badge/Development-Active%20Learning-orange)
-![Last Updated](https://img.shields.io/badge/Updated-2026-blue)
-![Contributions](https://img.shields.io/badge/Contributions-Welcome-blueviolet)
 
 # Hybrid RAG Pipeline (From Scratch — No Frameworks)
 
@@ -75,7 +57,7 @@ Unlike typical RAG projects that rely on frameworks, this system is:
 
 ---
 
-## 🚀 Overview
+##  Overview
 
 This project allows users to:
 
@@ -87,7 +69,7 @@ This project allows users to:
 ---
 
 
-## 🔩 Components
+##  Components
 
 ### Loader
 
